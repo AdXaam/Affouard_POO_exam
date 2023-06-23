@@ -25,4 +25,16 @@ if ($_GET["controller"] == "moto"){
     if ($_GET["action"] == "detail" && array_key_exists( 'id', $_GET)){
         $controller->displayOne($_GET["id"]);
     }
+
+    if($_GET["controller"] == 'user'){
+        $controller = new UserController();
+
+        if($_GET["action"] == 'login'){
+            $controller->login();
+        }
+
+        if($_GET["action"] == 'logout'){
+            $controller->logout();
+        }
+    }
 }
