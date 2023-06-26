@@ -12,9 +12,9 @@ class UserManager extends DbManager{
 
         $user = null;
         if($res != false){
+
             $user = new User($res["id"], $res["username"],
-                $res["nom"], $res["prenom"],
-                $res["password"]);
+                                    $res["password"]);
         }
 
         return $user;

@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand text-white" href="index.php?controller=default?action=home">
+        <a class="navbar-brand text-white" href="index.php?controller=default&action=home">
             <img src="public/images/logo.png" width="40" height="40" class="d-inline-block align-top" alt="">
             Moto Shop App
         </a>
@@ -13,6 +13,11 @@
                 <li class="nav-item">
                     <a class="nav-link text-white" href="index.php?controller=moto&action=list">Les motos</a>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="index.php?controller=user&action=login">Login</a>
+                </li>
+
 
             </ul>
             </div>

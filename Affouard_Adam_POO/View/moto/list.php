@@ -10,6 +10,7 @@
     <h1>Les motos !!!!!!!!!!!</h1>
     <a href="index.php?controller=default&action=home" class="btn btn-primary">Revenir en arrière</a>
     <br>
+    <a href="index.php?controller=moto&action=add" class="btn btn-success">Ajouter une moto</a>
 
 
     </div>
@@ -33,10 +34,13 @@
                 <td><?php echo($moto->getBrand()) ?></td>
                 <td><?php echo($moto->getModel()) ?></td>
                 <td><?php echo($moto->getType()) ?></td>
-                <td><img style="max-height: 50px" src="public/images/<?php echo($moto->getImage()) ?>" alt=""></td>
+                <td><img style="max-height: 50px" src="public/images/<?php echo($moto->getImage()) ?>" alt="une moto"></td>
                 <td>
                     <a href="index.php?controller=moto&action=detail&id=<?php echo($moto->getId());?>" class="btn btn-info">
                         Voir plus</a>
+
+                    <a href="index.php?controller=moto&action=delete&id=<?php echo($moto->getId());?>" class="btn btn-info">Supprimer la moto</a>
+
                 </td>
             </tr>
             <?php

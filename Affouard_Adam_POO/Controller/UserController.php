@@ -1,25 +1,20 @@
 <?php
 
-class UserController{
+class UserController {
+    // Manager qui permettra de requêter nos données utilisateur
+    private $userManager;
+    // Partagé avec les classe enfant c'est l'utilisateur connecté
+    protected $currentUser;
 
-private $userManager;
+    //
+    public function __construct()
+    {
+        session_start();
+        $this->userManager = new UserManager();
+        $this->currentUser = null;
+        if(array_key_exists("user", $_SESSION)){
 
-protected $currentUser;
-
-public function __construct()
-{
-    $this->userManager = new UserManager();
-    $this->currentUser = null;
-
-    if (array_key_exists("user",$_SESSION)){
-        $this->currentUser = unserialize($_SESSION["user"]);
-    }
-}
-
-    protected function isLoggedIn(){
-        if(!$this->currentUser){
-            header("Location: index.php?controller=user&action=login");
-            die();
+            $this->currentUser = unserialize($_SESSION["user"]);
         }
     }
 
@@ -27,7 +22,7 @@ public function __construct()
         session_destroy();
         $this->currentUser = null;
 
-        header('Location: index.php?controller=security&action=login');
+        header('Location: index.php?controller=user&action=login');
     }
 
     public function login(){
@@ -55,7 +50,6 @@ public function __construct()
 
 
         }
-        require 'View/security/login.php';
+        require 'View/user/login.php';
     }
-
 }

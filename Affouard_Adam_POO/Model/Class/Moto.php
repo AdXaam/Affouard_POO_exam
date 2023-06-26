@@ -8,7 +8,7 @@ class Moto{
     private $image;
 
 
-    public function __construct(int $id, string $brand, string $model, string $type, string $image)
+    public function __construct(int $id, string $brand, string $model, string $type, ?string $image)
     {
         $this->id = $id;
         $this->brand = $brand;
@@ -60,6 +60,9 @@ class Moto{
 
     public function getImage(): string
     {
+        if (is_null($this->image)) {
+            return "public/images/null.png";
+        }
         return $this->image;
     }
 

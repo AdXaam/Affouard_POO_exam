@@ -17,6 +17,18 @@ if($_GET["controller"] == 'default'){
     }
 }
 
+if ($_GET["controller"] == "user"){
+    $controller = new UserController();
+
+    if($_GET["action"] == 'login'){
+        $controller->login();
+    }
+
+    if($_GET["action"] == 'logout'){
+        $controller->logout();
+    }
+}
+
 if ($_GET["controller"] == "moto"){
     $controller = new MotoController();
     if ($_GET["action"] == "list"){
@@ -25,16 +37,17 @@ if ($_GET["controller"] == "moto"){
     if ($_GET["action"] == "detail" && array_key_exists( 'id', $_GET)){
         $controller->displayOne($_GET["id"]);
     }
-
-    if($_GET["controller"] == 'user'){
-        $controller = new UserController();
-
-        if($_GET["action"] == 'login'){
-            $controller->login();
-        }
-
-        if($_GET["action"] == 'logout'){
-            $controller->logout();
-        }
+    if ($_GET["action"] == "add"){
+        $controller->ajout();
     }
+    if($_GET["action"] == "delete" && array_key_exists("id", $_GET)){
+        $controller->delete($_GET["id"]);
+    }
+    if($_GET["action"] == 'update' && array_key_exists('id', $_GET)){
+        $controller->update($_GET["id"]);
+    }
+
+
+
+
 }

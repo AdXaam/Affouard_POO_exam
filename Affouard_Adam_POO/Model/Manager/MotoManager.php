@@ -9,12 +9,15 @@ class MotoManager extends DbManager{
 
         $motos = [];
 
-        foreach ($results as $res){
-            $motos[] = new Moto($res['id'], $res['brand'],
-                $res['model'],
-                $res['type'],
-                $res['image']);
+        foreach ($results as $res) {
+            $uniqFileName = "public/images/null.png";
+            if (!is_null($res["image"])) {
+                $uniqFileName = $res["image"];
+            }
+
+            $motos[] = new Moto($res['id'], $res['brand'], $res['model'], $res['type'], $uniqFileName);
         }
+
         return $motos;
     }
 
@@ -32,4 +35,36 @@ class MotoManager extends DbManager{
 
         return $moto;
     }
+
+    public function add(Moto $moto)
+    {
+
+        $brand = $moto->getBrand();
+        $model = $moto->getModel();
+        $type = $moto->getType();
+        $image = $moto->getImage();
+
+        $query = $this->pdo->prepare(
+            "INSERT INTO shop (brand, model, type, image) VALUES
+                    (:brand, :model, :type, :image)");
+
+        $query->execute(
+            [
+                "Brand" => $brand,
+                "Model" => $model,
+                "Type" => $type,
+                "Image" => $image]);
+
+        $moto->setId($this->pdo->lastInsertId());
+
+        return $moto;
+    }
+
+    public function delete($id){
+        $query = $this->pdo->prepare("DELETE FROM shop WHERE id=:id");
+        $query->bindParam("id", $id);
+        $query->execute();
+    }
+
+
 }
